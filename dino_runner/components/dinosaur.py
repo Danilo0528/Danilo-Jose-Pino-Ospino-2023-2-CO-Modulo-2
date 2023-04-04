@@ -7,7 +7,7 @@ class Dinosaur(Sprite):
     X_POS = 80
     Y_POS = 310
     JUMP_SPEED = 8.5
-    DUCK_TIME = 15 # tiempo que el dinosaurio permanece agachado
+    DUCK_TIME = 20 # tiempo que el dinosaurio permanece agachado
 
     def __init__(self):
         self.image = RUNNING[0]
@@ -60,7 +60,7 @@ class Dinosaur(Sprite):
             self.duck_time += 1
             if self.duck_time > self.DUCK_TIME:
                 self.is_ducked = False
-                self.duck_time = 0
+                #self.duck_time = 0
 
         if self.step_index >= 10:
             self.step_index = 0
@@ -91,7 +91,7 @@ class Dinosaur(Sprite):
 
     def duck(self):
         self.image = DUCKING[0]  # Cambia la imagen del dinosaurio a la imagen de agacharse
-        self.dino_rect = self.image.get_rect()  # Ajusta la posición del rectángulo
+        self.dino_rect = self.image.get_rect()  # Ajusta la posición
         self.dino_rect.x = self.X_POS
         self.dino_rect.y = self.Y_POS + 40 #más 40 unidades para simular el efecto de que el dinosaurio se agacha
         self.is_ducked = True  # Establece la bandera de agachado como verdadera
