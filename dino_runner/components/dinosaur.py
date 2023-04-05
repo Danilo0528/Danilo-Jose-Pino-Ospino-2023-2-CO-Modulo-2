@@ -99,4 +99,15 @@ class Dinosaur(Sprite):
     def draw(self,screen):
         screen.blit(self.image,(self.dino_rect.x,self.dino_rect.y))
 
-    
+    def reset_dinosaur(self):
+        self.image = RUNNING[0]
+        self.dino_rect = self.image.get_rect()
+        self.dino_rect.x =  self.X_POS
+        self.dino_rect.y = self.Y_POS
+        self.step_index = 0 #que pierna toca
+        self.dino_run = True #dice si esta corriendo
+        self.dino_jump = False #dice si esta saltando
+        self.jump_speed = self.JUMP_SPEED
+        self.is_ducked = False #dice si esta agachado
+        self.duck_time = 0 
+
