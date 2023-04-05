@@ -1,28 +1,43 @@
 import pygame
+import random
 from dino_runner.components.obstacles.catus import Cactus
-from dino_runner.utils.constants import SMALL_CACTUS,LARGE_CACTUS
+#from dino_runner.utils.constants import SMALL_CACTUS,LARGE_CACTUS,BIRD
+from dino_runner.components.obstacles.bird import Bird
 
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
     
-    def generate_obstacle(self):
+    def generate_obstacle(self,obstacle_type):
         #obstacle = Cactus(SMALL_CACTUS)
-        obstacle = Cactus(SMALL_CACTUS, size='small')
-        obstacle = Cactus(SMALL_CACTUS, 'small')
-        obstacle = Cactus(LARGE_CACTUS, 'large')
-
-        
+        #obstacle = Cactus(SMALL_CACTUS, size='small')
+        #obstacle = Cactus(SMALL_CACTUS, 'small')
+        #obstacle = Cactus(LARGE_CACTUS, 'large')
+        if obstacle_type == 0:
+            cactus_type = 'SMALL'
+            obstacle = Cactus(cactus_type)
+        elif obstacle_type == 1:
+            cactus_type = 'LARGE'
+            obstacle = Cactus(cactus_type)
+        else:
+            obstacle = Bird()
         return obstacle
-    
+            
     def update(self, game):
         if len(self.obstacles) == 0:
-            obstacle = self.generate_obstacle()
+
+            obstacle_type = random.randint(0, 2)
+            obstacle = self.generate_obstacle(obstacle_type)
             self.obstacles.append(obstacle)
 
-        for obstacle in self.obstacles:
+        for obstacle in self.obstacles: 
             obstacle.update(game.game_speed, self.obstacles)
-
+            if game.player.dino_rect.colliderect(obstacle.rect):
+                print('Collision')
+                pygame.time.delay(1000)
+                game.playing = False
+                break
+        
     def draw (self,screen):
         for obstacle in self.obstacles:
             obstacle.draw(screen)

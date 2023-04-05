@@ -2,24 +2,39 @@ import pygame
 import random
 
 from dino_runner.components.obstacles.obstacle import Obstacle
-from dino_runner.utils.constants import BIRD_HEIGHTS
-
+from dino_runner.utils.constants import BIRD
 
 class Bird(Obstacle):
-    def __init__(self, image, x, y):
-        self.type = 0
-        super().__init__(image, self.type, x, y)
-        self.heights = BIRD_HEIGHTS
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = random.choice(self.heights)
-        self.index = 0
+  BIRD_HEIGHTS = [280, 220, 170]
 
-    def draw(self, SCREEN):
-        if self.index >= 9:
-            self.index = 0
-        SCREEN.blit(self.image[self.index // 5], self.rect)
-        self.index += 1
+  def __init__(self):
+    self.type = 0
+    super().__init__(BIRD, self.type)
+    self.rect.y = self.BIRD_HEIGHTS[random.randint(0, 2)]
+    self.index = 0
+    
+  def draw(self, screen):
+    if self.index >= 9:
+     self.index = 0
+     
+    screen.blit(BIRD[self.index // 5], self.rect)
+    self.index += 1
+#Codigo a mejorar
+#class Bird(Obstacle):
+#    def __init__(self, image, x, y):
+#        self.type = 0
+#        super().__init__(image, self.type, x, y)
+#        self.heights = BIRD_HEIGHTS
+#        self.rect = self.image.get_rect()
+#        self.rect.x = x
+#        self.rect.y = random.choice(self.heights)
+#        self.index = 0
+#
+#    def draw(self, SCREEN):
+#        if self.index >= 9:
+#            self.index = 0
+#        SCREEN.blit(self.image[self.index // 5], self.rect)
+#        self.index += 1
 #Este código muestra una clase llamada "Bird" 
 # que representa un pájaro en un juego. 
 # El constructor de la clase recibe una imagen, 
