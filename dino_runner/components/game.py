@@ -26,7 +26,8 @@ class Game:
         self.score = Counter()
         self.death_count = Counter()
         self.highest_score = Counter()
-        self.power_ups = PowerUpManager
+       # self.power_ups = PowerUpManager
+        self.power_up_manager = PowerUpManager()
     def execute(self):
         self.running = True
         while self.running:
