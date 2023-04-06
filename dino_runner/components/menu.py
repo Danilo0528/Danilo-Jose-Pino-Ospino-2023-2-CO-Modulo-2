@@ -15,6 +15,7 @@ class Menu:
     def update(self,game):
         pygame.display.update()#se encarga de refrescar la pantalla#posicionar el display de la pantalla
         self.handle_events_on_menu(game)
+        
     def draw (self ,screen):
         screen.blit(self.text,self.text_rect)
 
